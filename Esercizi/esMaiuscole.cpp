@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+// Esercizio: utente inserisce una lettera minuscola o maiuscola. 
+// Bisogna restiruire la lettre maiuscola se minuscola e viceversa
 int main(){
     char a;
     int diff;
