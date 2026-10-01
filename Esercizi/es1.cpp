@@ -13,4 +13,5 @@ int main(){
     float volSf=4/3*(pow(r,2) * 3.14);
     cout << "Volume cerchio: " << volSf << endl;
     return 0;
+    //sqrt(4);
 }
