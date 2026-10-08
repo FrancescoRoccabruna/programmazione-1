@@ -11,10 +11,16 @@ int main(){
 
     int version;
 
-    cout << "inserisci 0 se hai inserito il prezzo netto, 1 se hai inserito il prezzo lordo " << endl;
+    cout << "inserisci 1 se hai inserito il prezzo netto, -1 se hai inserito il prezzo lordo " << endl;
 
     cin >> version;
     
-    float out = 
+    float out = prezzo + (version * prezzo * (iva/100));
+    
+    
+    cout << "Risultato: " << out;
+
+    return 0;
+    
 
 }
