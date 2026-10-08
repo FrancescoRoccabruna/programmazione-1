@@ -18,7 +18,7 @@ int main(){
         cin >> b >> d;
     }
 
-    if (x<= c && x >= a && y >= d && y<= b){
+    if (x<=c && x>=a && y>=d && y<=b){
         cout << "Il punto P si trova dentro al rettangolo: " << endl;
     }else{
         cout << "Il punto si trova fuori dal rettangolo: " << endl;
