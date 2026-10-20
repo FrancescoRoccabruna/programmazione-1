@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+
+void test(int& a, int b) {
+    int c = 2 * (a%2 == 0) - (a%2 != 0);
+    a += c;
+    a /= 2;
+    b *= a;
+}
+
+int main() {
+    int x = 5, y = 4;
+    test(x, y);
+    cout << x << " " << y << endl;
+    test(y, x);
+    cout << x << " " << y << endl;
+    return 0 ;
+
+}
+
+
