@@ -8,11 +8,11 @@ const int N_ROW=3;
 const int N_COL=4;
 
 
-void inizializza(int mat[][N_ROW], int nCol){
+void inizializza(int mat[][N_COL], int nRow){
     srand(time(nullptr));
 
-    for(int i=0; i<N_ROW; i++){
-        for(int j=0; j<nCol; j++){
+    for(int i=0; i<nRow; i++){
+        for(int j=0; j<N_COL; j++){
             mat[i][j]=rand() % (9 - 0 + 1) + 0;
         }
     }
@@ -35,4 +35,5 @@ int main(){
 
     stampa(puntaMatrice,N_ROW,N_COL);
     
+    return 0;
 }

@@ -35,4 +35,5 @@ int main(){
 
     stampa(array,N);
     
+    return 0;
 }
