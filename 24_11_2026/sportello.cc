@@ -1,5 +1,3 @@
-//sportello.cc
-
 #include "sportello.h"
 #include <fstream>
 #include <iomanip>
@@ -7,7 +5,7 @@
 
 using namespace std;
 
-bool Inserisci(const char nomeFile[], abbonamento*& arr, int& n, int& capacita) {
+bool Inserisci(const char nomeFile[], abbonamento arr[], int n) {
     abbonamento nuovo{};
 
     cout << "Numero abbonamento: ";
@@ -17,12 +15,12 @@ bool Inserisci(const char nomeFile[], abbonamento*& arr, int& n, int& capacita) 
         return false;
     }
 
-    cout << "Nome (max 30 caratteri, senza spazi): ";
+    cout << "Nome (max 31 caratteri, senza spazi): ";
     if (!(cin >> setw(MAX_LEN) >> nuovo.nome)) {
         return false;
     }
 
-    cout << "Cognome (max 30 caratteri, senza spazi): ";
+    cout << "Cognome (max 31 caratteri, senza spazi): ";
     if (!(cin >> setw(MAX_LEN) >> nuovo.cognome)) {
         return false;
     }
@@ -34,35 +32,22 @@ bool Inserisci(const char nomeFile[], abbonamento*& arr, int& n, int& capacita) 
 
     switch (nuovo.tipo) {
         case 'a':
-            nuovo.costo = COSTO_STAGIONALE;
+            nuovo.costo = 500.0;
             break;
         case 'm':
-            nuovo.costo = COSTO_MENSILE;
+            nuovo.costo = 150.0;
             break;
         case 's':
-            nuovo.costo = COSTO_SETTIMANALE;
+            nuovo.costo = 50.0;
             break;
         case 'g':
-            nuovo.costo = COSTO_GIORNALIERO;
+            nuovo.costo = 10.0;
             break;
         default:
             cout << "Tipo non valido. Inserimento annullato.\n";
             return false;
     }
 
-    // Punto 5: se l'array e' pieno, raddoppia la dimensione
-    if (n >= capacita) {
-        int nuovaCapacita = (capacita > 0) ? capacita * 2 : 2;
-        abbonamento* temp = new abbonamento[nuovaCapacita];
-        for (int i = 0; i < n; ++i) {
-            temp[i] = arr[i];
-        }
-        delete[] arr;
-        arr = temp;
-        capacita = nuovaCapacita;
-    }
-
-    // Punto 4: inserimento in coda al file esistente
     ofstream out(nomeFile, ios::app);
     if (!out.is_open()) {
         cout << "Errore nell'apertura del file in scrittura.\n";
@@ -81,6 +66,5 @@ bool Inserisci(const char nomeFile[], abbonamento*& arr, int& n, int& capacita) 
     }
 
     arr[n] = nuovo;
-    ++n;
     return true;
 }
