@@ -68,3 +68,46 @@ bool Inserisci(const char nomeFile[], abbonamento arr[], int n) {
     arr[n] = nuovo;
     return true;
 }
+
+double Guadagno(const abbonamento arr[], int n) {
+    double totale = 0.0;
+    for (int i = 0; i < n; ++i) {
+        totale += arr[i].costo * 0.9; // al netto del 10% di spese
+    }
+    return totale;
+}
+
+char Elabora(const abbonamento arr[], int n, double r[4]) {
+    for (int i = 0; i < 4; ++i) {
+        r[i] = 0.0;
+    }
+
+    for (int i = 0; i < n; ++i) {
+        switch (arr[i].tipo) {
+            case 'a':
+                r[0] += arr[i].costo;
+                break;
+            case 'm':
+                r[1] += arr[i].costo;
+                break;
+            case 's':
+                r[2] += arr[i].costo;
+                break;
+            case 'g':
+                r[3] += arr[i].costo;
+                break;
+            default:
+                break;
+        }
+    }
+
+    const char tipi[4] = {'a', 'm', 's', 'g'};
+    int idxMax = 0;
+    for (int i = 1; i < 4; ++i) {
+        if (r[i] > r[idxMax]) {
+            idxMax = i;
+        }
+    }
+
+    return tipi[idxMax];
+}

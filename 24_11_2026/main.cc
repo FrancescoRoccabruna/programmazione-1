@@ -8,11 +8,10 @@ using namespace std;
 
 const char Abbonamenti2026[] = "Abbonamenti2026.txt";
 
-int main(){
-
+int main() {
     fstream input;
     input.open(Abbonamenti2026, ios::in);
-    if(!input.is_open()){
+    if (!input.is_open()) {
         cout << "Il file non esiste" << endl;
         exit(1);
     }
@@ -26,8 +25,7 @@ int main(){
 
     cout << "Numero abbonamenti letti: " << a << endl;
 
-
-    int capacita = a * 2;
+    int capacita = (a > 0) ? a * 2 : 2;
     int n = 0;
     abbonamento* arr = new abbonamento[capacita];
 
@@ -57,18 +55,42 @@ int main(){
         }
 
         switch (scelta) {
-            case 1:
-                // Qui chiameremo Inserisci(...)
-                cout << "[Opzione 1: emissione nuovo abbonamento]\n";
+            case 1: {
+                if (Inserisci(Abbonamenti2026, arr, n)) {
+                    n++;
+                    cout << "Abbonamento inserito con successo.\n";
+                    // Punto 5: se ha occupato l'ultimo elemento dell'array, raddoppia la dimensione
+                    if (n == capacita) {
+                        int nuovaCapacita = capacita * 2;
+                        abbonamento* nuovoArr = new abbonamento[nuovaCapacita];
+                        for (int i = 0; i < n; ++i) {
+                            nuovoArr[i] = arr[i];
+                        }
+                        delete[] arr;
+                        arr = nuovoArr;
+                        capacita = nuovaCapacita;
+                    }
+                } else {
+                    cout << "Inserimento non effettuato.\n";
+                }
                 break;
-            case 2:
-                // Qui chiameremo Guadagno(...)
-                cout << "[Opzione 2: calcolo guadagno totale]\n";
+            }
+            case 2: {
+                double totGuadagno = Guadagno(arr, n);
+                cout << "Guadagno totale: " << totGuadagno << " euro\n";
                 break;
-            case 3:
-                // Qui chiameremo Elabora(...)
-                cout << "[Opzione 3: calcolo ricavo per tipologia]\n";
+            }
+            case 3: {
+                double r[4];
+                char maxTipo = Elabora(arr, n, r);
+                cout << "Ricavi per tipologia:\n"
+                     << "  Stagionale ('a'):   " << r[0] << " euro\n"
+                     << "  Mensile ('m'):      " << r[1] << " euro\n"
+                     << "  Settimanale ('s'):  " << r[2] << " euro\n"
+                     << "  Giornaliero ('g'):  " << r[3] << " euro\n"
+                     << "Tipologia con massimo ricavo: '" << maxTipo << "'\n";
                 break;
+            }
             case 4:
                 cout << "Uscita dal programma.\n";
                 break;
@@ -78,10 +100,6 @@ int main(){
         }
     } while (scelta != 4);
 
-
-    
     delete[] arr;
-
-
     return 0;
 }

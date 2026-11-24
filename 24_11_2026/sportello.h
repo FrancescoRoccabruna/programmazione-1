@@ -14,5 +14,7 @@ struct abbonamento {
 };
 
 bool Inserisci(const char nomeFile[], abbonamento arr[], int n);
+double Guadagno(const abbonamento arr[], int n);
+char Elabora(const abbonamento arr[], int n, double r[4]);
 
 #endif
