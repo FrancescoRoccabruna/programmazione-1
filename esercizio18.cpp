@@ -1,21 +1,31 @@
 
-/* Il nome del file è definito nel main come costante a livello di file. Il programma legge il file
+/* 1)
+ Il nome del file è definito nel main come costante a livello di file. Il programma legge il file
 Abbonamenti2026.txt e conta il numero di abbonamenti, poi alloca un array di strutture
 Abbonamento con un numero di elementi pari alla dimensione letta moltiplicato per due. Legge
 nuovamente il file e popola l'array */
 
 
-/*
+/* 2)
 Chiede all'operatore incaricato di scegliere un'operazione tra le seguenti: emettere un nuovo
 abbonamento; calcolare il guadagno totale (che viene poi stampato a video); calcolare il ricavo
 per tipologia di abbonamento come specificato sotto (che viene poi stampato a video); esci. Una
 volta eseguita l'operazione scelta, il programma ripropone le opzioni finché l'operatore non
 sceglie di uscire.
-
 */
+
+/* 3)
+Ogni operazione è implementata da una funzione. L'insieme delle dichiarazioni delle funzioni è
+disponibile nel file sportello.h, la loro implementazione si trova nel file sportello.cc. Non
+è consentito definire funzioni diverse da quelle richieste. Si scelga opportunamente dove
+collocare costanti e tipi.
+*/
+
 #include <iostream>
 #include <fstream>
 #include <cstring>
+
+#include "sportello.h"
 
 using namespace std;
 
@@ -29,11 +39,23 @@ struct Abbonamento
 
 };
 
+Abbonamento * crea_abbonamento(int n, char nome[30], char cognome[30], char tipo, int costo){
+
+            Abbonamento * abb = new Abbonamento;
+            strcpy(abb->nome, nome);
+            strcpy(abb->cognome, cognome);
+            abb->tipo = tipo;
+            abb->costo = costo;
+            return abb;
+}
+
 
 int main(int argc, char const *argv[])
 {
     int n_abbonamenti;
     
+
+
     
     ifstream file("multifile/Abbonamenti2026.txt");
     if (file.is_open()) {
@@ -53,6 +75,7 @@ int main(int argc, char const *argv[])
     int costo;
 
     ifstream file2("multifile/Abbonamenti2026.txt");
+    //creazione e popolamento degli array
     if (file2.is_open()) {
         while (tmp < n_abbonamenti && (file2 >> n_riga >> nome >> cognome >> tipo >> costo)) {
             Abbonamento * abb = new Abbonamento;
@@ -68,10 +91,62 @@ int main(int argc, char const *argv[])
     file2.close();
 }
 
+
+// punto 2 scegliere un operazione all'operatore
+
+cout << "scegli un operazione" << endl;
+char operazione;
+    // e : emissione
+    // c : calcolo
+    // r : ricavo
+    // x : esci
+
+    cin >> operazione;
+
+    switch (operazione) {
+        case 'e':
+            emissione();
+            break; //ok mi sembra veramente assurdo a dire il vero
+
+        case 'c':
+        // sostituire con il metodo che abbiamo creato in sportello.h !!!
+            int somma = 0;
+            for ( int i = 0; i<= tmp; i++){ // dimensione array
+                somma += arrAbbonamenti[i]->costo;
+            }
+            cout << "somma: " << somma;
+            break;
+
+        case 'r':
+
+        char tipo_operazione;
+        cin >> tipo_operazione;
+        switch (tipo_operazione)
+        {
+
+        case 'a':
+            /* code */
+            break;
+        case 's':
+            /* code */
+            break;
+        case 'j':
+            /* code */
+            break;
+
+        default:
+            break;
+        
+        }   
+            break;
+
+        case 'x':
+            exit(1);
+            break;
+
+        default:
+            break;   }
+
 return 0;
 
 }
-
-
-
-
